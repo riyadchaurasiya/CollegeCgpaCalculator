@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e8f5e9; /* Light green background */
+            color: #2e7d32; /* Dark green text */
+        }
+
+        #calculator {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #a5d6a7; /* Light green border */
+            border-radius: 10px;
+            background: linear-gradient(135deg, #a5d6a7, #81c784); /* Green gradient */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1b5e20; /* Deep green */
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 28px;
+        }
+
+        h2 {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            color: #388e3c;
+            font-size: 24px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #388e3c; /* Green button */
+            color: white;
+            border: none;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2e7d32;
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #c8e6c9; /* Light green for table header */
+            color: #1b5e20; /* Deep green */
+            font-weight: bold;
+        }
+
+        #cgpa {
+            font-weight: bold;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button:last-child {
+            margin-left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator">
+        <h1>HITAM</h1>
+        <h2>CGPA Calculator</h2>
+        <br>
+        <form method="post" action="{% url 'cgpa_calculator' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Subject</button>
+            <button><a href="{% url 'result' %}">Generate Result</a></button>
+        </form>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                    <th>Credit</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in subjects %}
+                <tr>
+                    <td style="font-family: 'Times New Roman', Times, serif;">{{ subject.name }}</td>
+                    <td style="font-family: 'Times New Roman', Times, serif;">{{ subject.grade }}</td>
+                    <td style="font-family: 'Times New Roman', Times, serif;">{{ subject.credit }}</td>
+                    <td>
+                        <button><a href="{% url 'edit_subject' subject.id %}">Edit</a></button>
+                        <button><a href="{% url 'delete_subject' subject.id %}">Delete</a></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <button style="margin-left: 400px;"><a href="{% url 'logout' %}">Logout</a></button>
+</body>
+
+</html>

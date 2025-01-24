@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>CGPA Calculator</title>
+    <style>
+        body {
+            background-color: #e8f5e9; /* Light green background */
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Modern shadow */
+        }
+
+        h4 {
+            color: #1b5e20; /* Deep green */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #81c784; /* Light green border */
+        }
+
+        .form-control:focus {
+            border-color: #388e3c; /* Darker green focus */
+            box-shadow: 0 0 5px #388e3c; /* Green glow on focus */
+        }
+
+        .btn-light {
+            color: white;
+            background-color: #388e3c; /* Green button */
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-light:hover {
+            background-color: #2e7d32; /* Darker green on hover */
+        }
+
+        a {
+            color: #388e3c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #2e7d32; /* Darker green on hover */
+            text-decoration: underline;
+        }
+
+        .alert-success {
+            background-color: #c8e6c9; /* Light green for alerts */
+            color: #1b5e20;
+        }
+    </style>
+</head>
+
+<body>
+    <br><br><br>
+
+    <div class="container mt-4 bg-white col-md-4 card shadow p-4" id="log">
+        <div class="login-form">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success {{ message.tags }} mt-4" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <h4 class="text-center" style="font-family: 'Times New Roman', Times, serif;">Login</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group mt-4 text-center">
+                    <button class="btn btn-light btn-block w-50">Login</button>
+                </div>
+            </form>
+            <p class="text-center mt-3" style="color: #555;">
+                <a href="{% url 'register' %}">Create an Account</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
